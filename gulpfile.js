@@ -1,16 +1,14 @@
-'use strict';
-
-var gulp = require('gulp'),
-    gutil = require('gulp-util'),
-    source = require('vinyl-source-stream'),
-    browserify = require('browserify'),
-    watchify = require('watchify'),
-    reactify = require('reactify'),
-    notifier = require('node-notifier'),
-    server = require('gulp-server-livereload'),
-    concat = require('gulp-concat'),
-    sass = require('gulp-sass'),
-    watch = require('gulp-watch');
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+var source = require('vinyl-source-stream');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var reactify = require('reactify');
+var notifier = require('node-notifier');
+var server = require('gulp-server-livereload');
+var concat = require('gulp-concat');
+var sass = require('gulp-sass');
+var watch = require('gulp-watch');
 
 var notify = function(error) {
   var message = 'In: ';
@@ -35,7 +33,7 @@ var notify = function(error) {
 };
 
 var bundler = watchify(browserify({
-  entries: ['./src/js/app.jsx'],
+  entries: ['./src/app.jsx'],
   transform: [reactify],
   extensions: ['.jsx'],
   debug: true,
@@ -81,19 +79,10 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('default', ['build', 'serve', 'sass', 'watch']);
-
 gulp.task('watch', function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
 });
 
-
-
-
-
-
-
-
-
+gulp.task('default', ['build', 'serve', 'sass', 'watch']);
 
 
