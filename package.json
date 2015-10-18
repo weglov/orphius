@@ -1,11 +1,11 @@
 {
-  "name": "orphius",
+  "name": "orph",
   "version": "1.0.0",
-  "description": "Orphius - new approach to grammar on the Internet",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/weglov"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "browserify": "^9.0.3",
     "gulp": "^3.8.11",
@@ -20,5 +20,6 @@
     "reactify": "^1.1.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^2.4.0"
-  }
+  },
+  "devDependencies": {}
 }
