@@ -5,15 +5,25 @@ var router = express.Router();
 
 // Models
 var Orph = require('../models/orph');
-var Sites = require('../models/site');
-
+var Resourse = require('../models/resourse');
+var User   = require('../models/user');
 
 
 // Routes
 Orph.methods(['get', 'put', 'post', 'delete']);
 Orph.register(router, '/orph');
 
-Sites.methods(['get', 'put', 'post', 'delete']);
-Sites.register(router, '/site');
+Resourse.methods(['get', 'put', 'post', 'delete']);
+Resourse.register(router, '/resourse');
+
+
+User.methods(['get', 'put', 'post', 'delete']);
+User.register(router, '/user');
+
+
+router.get('/', function(req, res) {
+  res.json({ message: 'Welcome to the coolest API on earth!' });
+});
+
 // Return router
 module.exports = router;
