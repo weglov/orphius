@@ -1,14 +1,10 @@
 var Fetch = require('whatwg-fetch');
 var rootUrl = 'http://localhost:3000/api/';
-var apiKey = '430d6820d865788';
+var apiKey = '12345';
 
-module.exports = window.api = {
+module.exports = {
   get: function(url) {
-    return fetch(rootUrl + url, {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
+    return fetch(rootUrl + url)
     .then(function(response){
       return response.json()
     })

@@ -4,11 +4,11 @@ var Link = Router.Link;
 
 module.exports = React.createClass({
 	render: function() {
-		return <div className="pure-menu pure-menu-horizontal">
-    		<Link to="/" className="pure-menu-heading pure-menu-link">Орфиус</Link>
-    	<ul className="pure-menu-list">
-        	<li className="pure-menu-item">
-        		<a href="#" className="pure-menu-link">News</a>
+		return <div className="header__menu">
+    		<Link to="/" className="header__menu--logo">Орфиус</Link>
+    	<ul className="header__list">
+        	<li className="header__item">
+        		<a href="#" className="header__item--link">Сайты</a>
         	</li>
     	</ul>
     	</div>
