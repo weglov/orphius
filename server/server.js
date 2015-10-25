@@ -1,9 +1,10 @@
 
-// Dependencies
+// // Dependencies
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var morgan      = require('morgan');
+var cors = require('cors');
 var jwt    = require('jsonwebtoken');
 var config = require('./config'); 
 // MongoDB
@@ -11,12 +12,15 @@ mongoose.connect(config.database);
 
 // Express
 var app = express();
+
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Routes
 app.use('/api', require('./routes/api'));
 app.use(morgan('dev'));
+
 app.set('superSecret', config.secret);
 
 app.get('/', function(req, res) {

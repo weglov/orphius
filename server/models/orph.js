@@ -1,4 +1,3 @@
-
 // Dependencies
 var restful = require('node-restful');
 var mongoose = restful.mongoose;
@@ -12,4 +11,4 @@ var orphSchema = new mongoose.Schema({
 });
 
 // Return model
-module.exports = restful.model('orph', orphSchema);
+module.exports = restful.model('Orph', orphSchema);

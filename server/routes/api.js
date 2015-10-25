@@ -2,6 +2,7 @@
 // Dependencies
 var express = require('express');
 var router = express.Router();
+var cors = require('cors');
 
 // Models
 var Orph = require('../models/orph');
@@ -10,6 +11,7 @@ var User   = require('../models/user');
 
 
 // Routes
+
 Orph.methods(['get', 'put', 'post', 'delete']);
 Orph.register(router, '/orph');
 
