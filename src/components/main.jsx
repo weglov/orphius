@@ -4,7 +4,7 @@ var OrphList = require('./orhp-list');
 
 module.exports = React.createClass({
 	render: function() {
-		return <div className="header">
+		return <div className="main">
 		<Header /> 
 		{this.content()}
 

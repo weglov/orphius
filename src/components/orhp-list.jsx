@@ -1,7 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var OrphStore = require('../stores/orph-store');
-
+ // 50 лвл
 
 module.exports = React.createClass({
 	getInitialState: function() {

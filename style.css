@@ -1,2 +1,30 @@
-.black {
-  color: black; }
+.header {
+  font-family: Consolas, Courier, monospace;
+  color: #333;
+  height: 65px;
+  background: #FAFAFA;
+  box-sizing: border-box;
+  padding: 10px; }
+  .header__menu--logo {
+    position: absolute;
+    top: 7px;
+    left: 0;
+    font-size: 2em;
+    text-transform: uppercase;
+    text-decoration: none; }
+  .header__list {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 14px;
+    list-style: none; }
+  .header a {
+    color: #333;
+    text-decoration: none; }
+
+.section {
+  position: relative;
+  width: 990px;
+  max-width: none;
+  margin: 0 auto; }
