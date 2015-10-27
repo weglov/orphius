@@ -1,7 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var OrphStore = require('../stores/orph-store');
- // 51 лвл
+var Actions = require('../action');
 
 module.exports = React.createClass({
 	mixins: [
@@ -13,7 +13,7 @@ module.exports = React.createClass({
 		}
 	},
 	componentWillMount: function() {
-		OrphStore.getOrphs()
+		Actions.getOrphs()
 	},
 	render: function() {
 		return <div className="">
@@ -22,7 +22,9 @@ module.exports = React.createClass({
 	},
  	renderOrphs: function() {
     return this.state.orphs.map(function(orphs) {
-		  return orphs;
+    	return <div className="orph__item" key={orphs.id}>
+    	{orphs.left}<span> {orphs.main} </span> {orphs.right}
+    	</div>
 		});
   },
   onChange: function(event, orphs) {

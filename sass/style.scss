@@ -9,6 +9,7 @@ body {
     background: #FAFAFA;
     box-sizing: border-box;
     padding: 10px;
+    border-bottom: 1px solid #eee;
     &__menu--logo {
     	position: absolute;
     	top: 4px;
@@ -24,7 +25,8 @@ body {
     	padding:0;
     	position: absolute;
     	right: 0;
-    	top: 14px;
+		font-size: 2em;
+    	top: 7px;
     	list-style: none;
     }
 	a {
