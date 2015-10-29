@@ -40,3 +40,13 @@ body {
     max-width: none;
     margin: 0 auto;
 }
+
+.orph__container {
+    padding: 20px;
+    box-sizing:border-box;
+    .orph__item {
+        padding: 5px 10px;
+        border: 1px solid #999;
+        margin-bottom: -1px;
+    }
+}

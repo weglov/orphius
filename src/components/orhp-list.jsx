@@ -16,8 +16,10 @@ module.exports = React.createClass({
 		Actions.getOrphs()
 	},
 	render: function() {
-		return <div className="">
-		{this.renderOrphs()}
+		return <div className="section">
+			<div className="orph__container">	
+			{this.renderOrphs()}
+			</div>
 		</div>
 	},
  	renderOrphs: function() {
