@@ -1,7 +1,7 @@
-var React = require('react');
-var Reflux = require('reflux');
-var OrphStore = require('../stores/orph-store');
-var Actions = require('../action');
+var React = require('react'),
+	Reflux = require('reflux'),
+	OrphStore = require('../stores/orph-store'),
+	Actions = require('../action');
 
 module.exports = React.createClass({
 	mixins: [
