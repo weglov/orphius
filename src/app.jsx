@@ -1,5 +1,5 @@
-var React = require('react');
-var Routes = require('./routes');
-var Api = require('./utils/api');
+var React = require('react'),
+	Routes = require('./routes'),
+	Api = require('./utils/api');
 
 React.render(Routes, document.body);
