@@ -1,14 +1,14 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var source = require('vinyl-source-stream');
-var browserify = require('browserify');
-var watchify = require('watchify');
-var reactify = require('reactify');
-var notifier = require('node-notifier');
-var server = require('gulp-server-livereload');
-var concat = require('gulp-concat');
-var sass = require('gulp-sass');
-var watch = require('gulp-watch');
+var gulp = require('gulp'),
+    gutil = require('gulp-util'),
+    source = require('vinyl-source-stream'),
+    browserify = require('browserify'),
+    watchify = require('watchify'),
+    reactify = require('reactify'),
+    notifier = require('node-notifier'),
+    server = require('gulp-server-livereload'),
+    concat = require('gulp-concat'),
+    sass = require('gulp-sass'),
+    watch = require('gulp-watch');
 
 var notify = function(error) {
   var message = 'In: ';
