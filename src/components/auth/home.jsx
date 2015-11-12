@@ -1,5 +1,4 @@
 var React = require('react'),
-    Reflux = require('reflux'),
     Actions = require('../../action');
 
     module.exports = React.createClass({
