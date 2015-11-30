@@ -1,18 +1,34 @@
 var React = require('react'),
-    Actions = require('../../action');
+    Actions = require('../../action'),
+    Auth = require('../auth/login');
 
     module.exports = React.createClass({
-    showLock: function() {
-      this.props.lock.show();
+    login: function() {
+      Auth.login(this.state.user, this.state.password)
+      .catch(function(err) {
+        console.log('“Error logging in”', err);
+      });
     },
-
-    render: function() {
+    getInitialState: function() {
+    return {
+      value: '',
+      password: ''
+      };
+    },
+    mailChange: function(event) {
+      this.setState({value: event.target.value.substr(0, 140)});
+    },
+    passChange: function(event) {
+      this.setState({password: event.target.value});
+    },
+    render: function() { 
+      var value = this.state.value;
+      var password = this.state.password;
       return (
-      <div className="login-box auth0-box before">
-        <img src="https://i.cloudup.com/StzWWrY34s.png" />
-        <h3>Auth0 Example</h3>
-        <p>Zero friction identity infrastructure, built for developers</p>
-        <a onClick={this.showLock} className="btn btn-primary btn-lg btn-login btn-block">Sign In</a>
-      </div>);
+      <form className="login__box" role="form" onSubmit="">
+          <input type="text" placeholder='E-mail' value={value} onChange={this.mailChange} />
+          <input type="password" placeholder='Password' value={password} onChange={this.passChange} />
+          <button type='submit'>Войти</button>
+      </form>);
     }
 });

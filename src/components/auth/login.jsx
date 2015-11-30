@@ -1,7 +1,7 @@
 var React = require('react'),
-	Reflux = require('reflux'),
-	Actions = require('../../action'),
-	Home = require('./home');
+	  Reflux = require('reflux'),
+	  Actions = require('../../action'),
+	  Home = require('./home');
 
 module.exports = React.createClass({
   componentWillMount: function() {
@@ -12,6 +12,7 @@ module.exports = React.createClass({
   createLock: function() {
     this.lock = ' ';
   },
+  
   setupAjax: function() {
     // $.ajaxSetup({
     //   'beforeSend': function(xhr) {
