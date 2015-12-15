@@ -1,13 +1,14 @@
 var React = require('react'),
     Actions = require('../../action'),
     Sign = require('../auth/sign');
+    Api = require('../../utils/api')
 
     module.exports = React.createClass({
     getInitialState: function() {
-    return {
-      value: '',
-      password: ''
-      };
+      return {
+             value: '',
+             password: ''
+            };
     },
     mailChange: function(event) {
       this.setState({value: event.target.value.substr(0, 140)});
@@ -15,12 +16,11 @@ var React = require('react'),
     passChange: function(event) {
       this.setState({password: event.target.value});
     },
-    signIn(e) {
-    e.preventDefault();
-    Sign.login(this.state.user, this.state.password)
-      .catch(function(err) {
-        console.log(err);
-      });
+    signIn: function(e) {
+      return Api.post('user', 'form')
+        .then(function(json){
+            console.log(this);
+        }.bind(this));
     },
     render: function() { 
       var value = this.state.value;
