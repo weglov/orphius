@@ -5,7 +5,6 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var morgan      = require('morgan');
 var cors = require('cors');
-var jwt    = require('jsonwebtoken');
 var config = require('./config'); 
 // MongoDB
 mongoose.connect(config.database);
@@ -26,6 +25,7 @@ app.set('superSecret', config.secret);
 app.get('/', function(req, res) {
     res.send('Hello! The API is at http://localhost:3000/api');
 });
+
 
 
 

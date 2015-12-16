@@ -7,26 +7,28 @@ var React = require('react'),
     getInitialState: function() {
       return {
              value: '',
-             password: ''
+             password: '',
+             name: ''
             };
     },
     mailChange: function(event) {
-      this.setState({value: event.target.value.substr(0, 140)});
+      this.setState({name: event.target.value.substr(0, 140)});
     },
     passChange: function(event) {
       this.setState({password: event.target.value});
     },
     signIn: function(e) {
-      return Api.post('user', 'form')
+      var form = JSON.stringify(this.state);
+      return Api.post('authenticate', form)
         .then(function(json){
             console.log(this);
         }.bind(this));
     },
     render: function() { 
-      var value = this.state.value;
+      var value = this.state.name;
       var password = this.state.password;
       return (
-      <form className="login__box" role="form" onSubmit={this.signIn}>
+      <form className="login__box" name="signin" role="form" onSubmit={this.signIn}>
           <input type="text" placeholder='E-mail' value={value} onChange={this.mailChange} />
           <input type="password" placeholder='Password' value={password} onChange={this.passChange} />
           <button type='submit'>Войти</button>

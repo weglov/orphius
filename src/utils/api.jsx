@@ -11,6 +11,10 @@ module.exports = {
   post: function(url, form) {
     return fetch(rootUrl + url, {
       method: 'post',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
       body: form
     })
   }
