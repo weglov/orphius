@@ -7,7 +7,8 @@ var React = require('react'),
     getInitialState: function() {
       return {
              email: '',
-             password: ''
+             password: '',
+             message: ''
             };
     },
     mailChange: function(event) {
@@ -20,7 +21,9 @@ var React = require('react'),
       var form = JSON.stringify(this.state);
       return Api.post('authenticate', form)
         .then(function(json){
-            // console.log(this);
+          this.setState({
+            message: json.message
+          });
         }.bind(this));
     },
     render: function() { 
@@ -31,6 +34,7 @@ var React = require('react'),
           <input type="text" placeholder='E-mail' value={email} onChange={this.mailChange} />
           <input type="password" placeholder='Password' value={password} onChange={this.passChange} />
           <button type='submit'>Войти</button>
+          <div className="login__box_caption">{this.state.message}</div>
       </form>);
     }
 });

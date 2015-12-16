@@ -16,6 +16,8 @@ module.exports = {
       'Content-Type': 'application/json; charset=utf-8'
       },
       body: form
+    }).then(function(response){
+      return response.json()
     })
   }
 };
