@@ -20,17 +20,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Routes
 
-Orph.methods(['get', 'put', 'post', 'delete']);
-Orph.register(router, '/orph');
-
-Resourse.methods(['get', 'put', 'post', 'delete']);
-Resourse.register(router, '/resourse');
-
-
-User.methods(['get', 'put', 'post', 'delete']);
-User.register(router, '/user');
-
-
 router.post('/authenticate', function(req, res) {
 	// find the user
 	User.findOne({
@@ -101,9 +90,19 @@ router.use(function(req, res, next) {
 	
 });
 
-router.get('/check', function(req, res) {
+router.get(function(req, res) {
 	res.json(req.decoded);
 });
+
+Orph.methods(['get', 'put', 'post', 'delete']);
+Orph.register(router, '/orph');
+
+Resourse.methods(['get', 'put', 'post', 'delete']);
+Resourse.register(router, '/resourse');
+
+
+User.methods(['get', 'put', 'post', 'delete']);
+User.register(router, '/user');
 
 
 router.get('/', function(req, res) {
