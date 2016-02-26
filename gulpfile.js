@@ -33,7 +33,7 @@ var notify = function(error) {
 };
 
 var bundler = watchify(browserify({
-  entries: ['./app/app.jsx'],
+  entries: ['./src/app.jsx'],
   transform: [reactify],
   extensions: ['.jsx'],
   debug: true,
