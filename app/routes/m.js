@@ -1,5 +1,5 @@
 var express = require('express');
-var rdb = require('../db/rethink');
+var rdb = require('../db/database');
 var router = express.Router();
 
 router.post('/', function (req, res, next) {

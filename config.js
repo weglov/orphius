@@ -1,6 +1,7 @@
 module.exports = {
-    api: 'v1',
+    api: '/v1',
     host: 'localhost',
     port: 28015,
-    db: 'orphio'
+    db: 'orphio',
+    secret: 'mysupersecret' 
 };
