@@ -2,12 +2,11 @@ var express = require('express');
 var rdb = require('../db/database');
 var auth = require('../db/auth');
 var token = require('../db/token');
-var router = express.Router();
 
 var router = express.Router();
 
-router.post('/', function (request, response, next) {
-    rdb.findBy('users', 'email', request.body.email)
+router.post('/', function (req, res, next) {
+    rdb.findBy('users', 'email', req.body.email)
     .then(function (user) {
         user = user[0];
 
@@ -17,7 +16,7 @@ router.post('/', function (request, response, next) {
             return next(userNotFoundError);
         }
 
-        auth.authenticate(request.body.password, user.password)
+        auth.authenticate(req.body.password, user.password)
         .then(function (authenticated) {
             if(authenticated) {
                 var currentUser = {
@@ -26,14 +25,14 @@ router.post('/', function (request, response, next) {
                     token: token.generate(user)
                 };
 
-                response.json(currentUser);
+                res.json(currentUser);
             } else {
                 var authenticationFailedError = new Error('Authentication failed');
                 authenticationFailedError.status = 401;
                 return next(authenticationFailedError);
             }
         });
-    });
+    })
 });
 
 module.exports = router;

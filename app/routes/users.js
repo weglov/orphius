@@ -4,15 +4,15 @@ var auth = require('../db/auth');
 var router = express.Router();
 
 
-router.get('/', auth.authorize, function (request, response) {
+router.get('/', auth.authorize, function (req, res) {
     rdb.findAll('users')
     .then(function (users) {
-        response.json(users);
+        res.json(users);
     });
 });
 
-router.get('/:id', auth.authorize, function (request, response, next) {
-    rdb.find('users', request.params.id)
+router.get('/:id', auth.authorize, function (req, res, next) {
+    rdb.find('users', req.params.id)
     .then(function (user) {
         if(!user) {
             var notFoundError = new Error('User not found');
@@ -20,45 +20,45 @@ router.get('/:id', auth.authorize, function (request, response, next) {
             return next(notFoundError);
         }
 
-        response.json(user);
+        res.json(user);
     });
 });
 
-router.post('/', auth.authorize, function (request, response) {
-    auth.hash_password(request.body.password)
+router.post('/', function (req, res) {
+    auth.hash_password(req.body.password)
     .then(function (hash) {
         var newUser = {
-            name: request.body.name,
-            email: request.body.email,
+            name: req.body.name,
+            email: req.body.email,
             password: hash
         };
 
         rdb.save('users', newUser)
         .then(function (result) {
-            response.json(result);
+            res.json(result);
         });
     });
 });
 
-router.put('/:id', auth.authorize, function (request, response) {
-    rdb.find('users', request.params.id)
+router.put('/:id', auth.authorize, function (req, res) {
+    rdb.find('users', req.params.id)
     .then(function (user) {
         var updateUser = {
-            name: request.body.user || user.name,
-            email: request.body.email || user.email
+            name: req.body.user || user.name,
+            email: req.body.email || user.email
         };
 
         rdb.edit('user', user.id, updateUser)
         .then(function (results) {
-            response.json(results);
+            res.json(results);
         });
     });
 });
 
-router.delete('/:id', auth.authorize, function (request, response) {
-    rdb.destroy('users', request.params.id)
+router.delete('/:id', auth.authorize, function (req, res) {
+    rdb.destroy('users', req.params.id)
     .then(function (results) {
-        response.json(results);
+        res.json(results);
     });
 });
 

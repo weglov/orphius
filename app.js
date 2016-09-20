@@ -5,6 +5,7 @@ var CONFIG = require('./config');
 var m = require('./app/routes/m');
 var users = require('./app/routes/users');
 var login = require('./app/routes/login');
+var signup = require('./app/routes/signup');
 var app = express();
 
 
@@ -19,13 +20,27 @@ var port = process.env.PORT || 888;
 app.use(CONFIG.api + '/m', m);
 app.use(CONFIG.api + '/users', users);
 app.use(CONFIG.api + '/login', login);
+app.use(CONFIG.api + '/signup', signup);
 
 // Text placeholder
 app.get('/', function(req, res) {
     res.send('Current version on: ' + CONFIG.api);
 });
 
+// Главный роутер
 app.use(CONFIG.api, router);
+
+
+// error
+app.use(function (error, request, response, next) {
+    response.status(error.status || 500);
+    response.json({ 
+    	status: false,
+    	code: error.status,
+    	message: error.message
+    });
+});
+
 
 app.listen(port);
 console.log('localhost: ' + port);
