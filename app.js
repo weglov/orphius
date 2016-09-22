@@ -2,6 +2,12 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var CONFIG = require('./config');
+
+// guard 
+var cors = require('cors');
+var helmet = require('helmet');
+
+// router
 var m = require('./app/routes/m');
 var users = require('./app/routes/users');
 var login = require('./app/routes/login');
@@ -13,6 +19,9 @@ var router = express.Router();
 // MIDDLEWHERE
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
+app.use(helmet());
+
 
 var port = process.env.PORT || 888;
 
