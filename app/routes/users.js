@@ -35,6 +35,8 @@ router.post('/', function (req, res, next) {
             return next(emailIsBusy);
         }
         // new user
+
+
         auth.hash_password(req.body.password)
         .then(function (hash) {
                 var newUser = {
@@ -48,6 +50,11 @@ router.post('/', function (req, res, next) {
                 .then(function (result) {
                     res.json(result);
                 });
+        })
+        .catch(function(e) {
+            var emailIsBusy = new Error('password wrong');
+            emailIsBusy.status = e;
+            return next(emailIsBusy);
         });
     })
 });

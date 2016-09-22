@@ -1,34 +1,66 @@
 var express = require('express');
 var rdb = require('../db/database');
-var router = express.Router();
 var auth = require('../db/auth');
+var router = express.Router();
 
 var table = 'resource';
 
+router.get('/:id', auth.authorize, function (req, res, next) {
+    rdb.find(table, req.params.id)
+    .then(function (resource) {
+        if(!resource) {
+            var notFoundError = new Error('resource not found');
+            notFoundError.status = 404;
+            return next(notFoundError);
+        }
+
+        res.json(resource);
+    });
+});
 
 router.post('/', auth.authorize, function (req, res) {
-		if (req.body.m && req.body.url && req.body.resource) {
-			var newM = {
-            m: req.body.m,
-            left: req.body.left,
-            right: req.body.right,
-            check: req.body.check || false,
-            url: req.body.url,
-            resource: req.body.resource
+		if (req.body.name && req.body.source) {
+			var newResourse = {
+            name: req.body.name,
+            access: req.body.access || {},
+            source: req.body.source || '',
+            settings: req.body.settings || {}
         	};
 		} else {
-			var incorrectError = new Error('incorrect mistake');
+			var incorrectError = new Error('incorrect resourse');
             incorrect.code = 401;
             return next(incorrect);
 		}
         
 
-        rdb.save(table, newM)
+        rdb.save(table, newResourse)
         .then(function (result) {
             res.json(result);
         });
 });
 
+router.put('/:id', auth.authorize, function (req, res) {
+    rdb.find(table, req.params.id)
+    .then(function (resource) {
+        var updateResource = {
+            name: req.body.name || resource.name,
+            access: req.body.access || resource.access,
+            source: req.body.source || resource.source,
+            settings: req.body.settings || resource.settings
+        };
 
+        rdb.edit(table, resource.id, updateResource)
+        .then(function (results) {
+            res.json(results);
+        });
+    });
+});
+
+router.delete('/:id', auth.authorize, function (req, res) {
+    rdb.destroy(table, req.params.id)
+    .then(function (results) {
+        res.json(results);
+    });
+});
 
 module.exports = router;

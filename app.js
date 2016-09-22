@@ -5,7 +5,7 @@ var CONFIG = require('./config');
 var m = require('./app/routes/m');
 var users = require('./app/routes/users');
 var login = require('./app/routes/login');
-var signup = require('./app/routes/signup');
+var resource = require('./app/routes/resource');
 var app = express();
 
 
@@ -20,6 +20,7 @@ var port = process.env.PORT || 888;
 app.use(CONFIG.api + '/m', m);
 app.use(CONFIG.api + '/users', users);
 app.use(CONFIG.api + '/login', login);
+app.use(CONFIG.api + '/resource', resource);
 
 // Text placeholder
 app.get('/', function(req, res) {
