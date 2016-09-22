@@ -22,8 +22,8 @@ router.post('/', function (req, res) {
 		if (req.body.m && req.body.url && req.body.resource) {
 			var newM = {
             m: req.body.m,
-            left: req.body.left,
-            right: req.body.right,
+            left: req.body.left || '',
+            right: req.body.right || '',
             check: req.body.check || false,
             url: req.body.url,
             resource: req.body.resource

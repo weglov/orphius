@@ -20,7 +20,6 @@ var port = process.env.PORT || 888;
 app.use(CONFIG.api + '/m', m);
 app.use(CONFIG.api + '/users', users);
 app.use(CONFIG.api + '/login', login);
-app.use(CONFIG.api + '/signup', signup);
 
 // Text placeholder
 app.get('/', function(req, res) {
