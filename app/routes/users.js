@@ -31,7 +31,7 @@ router.post('/', function (req, res, next) {
         // email is busy
         if(user) {
             var emailIsBusy = new Error('email is busy');
-            emailIsBusy.status = 400;
+            emailIsBusy.status = 403;
             return next(emailIsBusy);
         }
         // new user

@@ -42,7 +42,7 @@ app.use(CONFIG.api, router);
 
 // error
 app.use(function (error, request, response, next) {
-    response.status(error.status || 500);
+    response.status(200);
     response.json({ 
     	status: false,
     	code: error.status,
