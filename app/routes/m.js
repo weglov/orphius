@@ -5,17 +5,14 @@ var auth = require('../db/auth');
 
 var table = 'm';
 
-router.get('/:resource', auth.authorize, function (req, res, next) {
-    rdb.findIndexed(table, req.params.resource, 'resource')
-    .then(function (m) {
-        if(!m) {
-            var notFoundError = new Error('Resource not found');
-            notFoundError.status = 404;
-            return next(notFoundError);
-        }
-        res.json(m);
-    });
+router.get('/', function (req, res, next) {
+    // rdb.changes('m', 'ren.tv').then(function (m) {
+    //       m.each(function(err, item) {
+    //         io.sockets.emit("stats", item);
+    //       });
+    // });
 });
+
 
 
 router.post('/', function (req, res) {

@@ -2,6 +2,13 @@ var rdb = require('rethinkdb');
 var CONFIG = require('../../config');
 var connection = rdb.connect(CONFIG)
 .then(function (connection) {
+
+    module.exports.changes = function (tableName, id) {
+        return rdb.table(tableName).changes().run(connection)
+        .then(function (cursor) {
+            return cursor;
+        });
+    };
     module.exports.find = function (tableName, id) {
         return rdb.table(tableName).get(id).run(connection)
         .then(function (result) {

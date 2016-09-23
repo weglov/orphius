@@ -11,7 +11,7 @@ var login = require('./app/routes/login');
 var resource = require('./app/routes/resource');
 var router = express.Router();
 var port = process.env.PORT || 888;
-
+var rdb = require('./app/db/database');
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -22,9 +22,12 @@ server.listen(888);
 
 
 io.on('connection', function(socket) {  
-    socket.emit('announcements', { message: 'A new user has joined!' });
+        return rdb.changes('m').then(function (m) {
+          m.each(function(err, item) {
+            io.sockets.emit('m', item);
+          });
+        });
 });
-
 
 
 // MIDDLEWHERE
