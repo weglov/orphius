@@ -17,6 +17,12 @@ router.get('/:resource', auth.authorize, function (req, res, next) {
     });
 });
 
+router.get('/changes/:id', function (req, res, next) {
+    rdb.changes(table, req.params.id)
+    .then(function (m) {
+        res.json(m);
+    });
+});
 
 router.post('/', function (req, res) {
 		if (req.body.m && req.body.url && req.body.resource) {

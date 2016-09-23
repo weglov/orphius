@@ -35,22 +35,19 @@ router.post('/', function (req, res, next) {
             return next(emailIsBusy);
         }
         // new user
-
-
         auth.hash_password(req.body.password)
-        .then(function (hash) {
-                var newUser = {
-                    name: req.body.name,
-                    email: req.body.email,
-                    password: hash,
-                    active: req.body.active || true
-                };
+            .then(function (hash) {
+                    var newUser = {
+                        email: req.body.email,
+                        password: hash,
+                        active: req.body.active || true
+                    };
 
-                rdb.save('users', newUser)
-                .then(function (result) {
-                    res.json(result);
-                });
-        })
+                    rdb.save('users', newUser)
+                    .then(function (result) {
+                        res.json(result);
+                    });
+            })
         .catch(function(e) {
             var emailIsBusy = new Error('password wrong');
             emailIsBusy.status = e;
