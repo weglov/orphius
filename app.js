@@ -1,29 +1,42 @@
 var express = require('express');
-var app = express();
 var bodyParser = require('body-parser');
 var CONFIG = require('./config');
-
 // guard 
 var cors = require('cors');
 var helmet = require('helmet');
-
 // router
 var m = require('./app/routes/m');
 var users = require('./app/routes/users');
 var login = require('./app/routes/login');
 var resource = require('./app/routes/resource');
-var app = express();
-
-
 var router = express.Router();
+var port = process.env.PORT || 888;
+
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+server.listen(888);
+
+
+// sockio
+
+
+io.on('connection', function(socket) {  
+    socket.emit('announcements', { message: 'A new user has joined!' });
+});
+
+
+
 // MIDDLEWHERE
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 app.use(helmet());
 
 
-var port = process.env.PORT || 888;
 
 // Routers
 app.use(CONFIG.api + '/m', m);
@@ -51,5 +64,3 @@ app.use(function (error, request, response, next) {
 });
 
 
-app.listen(port);
-console.log('localhost: ' + port);

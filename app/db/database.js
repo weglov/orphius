@@ -1,18 +1,7 @@
 var rdb = require('rethinkdb');
 var CONFIG = require('../../config');
-
 var connection = rdb.connect(CONFIG)
 .then(function (connection) {
-
-
-    module.exports.changes = function (tableName, value) {
-        var obj = {'resource': value};
-        return rdb.table(tableName).filter(obj).changes().run(connection)
-        .then(function (result) {
-            return result;
-        });
-    };
-
     module.exports.find = function (tableName, id) {
         return rdb.table(tableName).get(id).run(connection)
         .then(function (result) {

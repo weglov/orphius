@@ -5,3 +5,4 @@ server/mongodb-osx-x86_64-3.0.7
 server/node_modules
 mongodb
 mongodb-osx-x86_64-3.0.7
+config.js
