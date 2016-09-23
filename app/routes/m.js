@@ -5,15 +5,6 @@ var auth = require('../db/auth');
 
 var table = 'm';
 
-router.get('/', function (req, res, next) {
-    // rdb.changes('m', 'ren.tv').then(function (m) {
-    //       m.each(function(err, item) {
-    //         io.sockets.emit("stats", item);
-    //       });
-    // });
-});
-
-
 
 router.post('/', function (req, res) {
 		if (req.body.m && req.body.url && req.body.resource) {

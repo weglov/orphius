@@ -22,7 +22,7 @@ server.listen(888);
 
 
 io.on('connection', function(socket) {  
-        return rdb.changes('m').then(function (m) {
+        rdb.changes('m').then(function (m) {
           m.each(function(err, item) {
             io.sockets.emit('m', item);
           });
