@@ -16,23 +16,24 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 server.listen(888);
-
+var socketAction = require('./app/socket/io.js');
 
 // sockio
 
 
-io.on('connection', function(socket) {  
-        rdb.changes('m').then(function (m) {
-          m.each(function(err, item) {
-            io.sockets.emit('m', item);
-          });
-        });
+io.on('connection', function(socket) {
+        // socket event
+        socketAction(io, socket);
+        socket.on('disconnect', function () {
+            
+        })
 });
 
 
 // MIDDLEWHERE
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 app.use(cors({
     origin: true,
     credentials: true
@@ -47,7 +48,7 @@ app.use(CONFIG.api + '/users', users);
 app.use(CONFIG.api + '/login', login);
 app.use(CONFIG.api + '/resource', resource);
 
-// Text placeholder
+// Main page version
 app.get('/', function(req, res) {
     res.send('Current version on: ' + CONFIG.api);
 });
@@ -56,7 +57,7 @@ app.get('/', function(req, res) {
 app.use(CONFIG.api, router);
 
 
-// error
+// error all header 200 code
 app.use(function (error, request, response, next) {
     response.status(200);
     response.json({ 

@@ -14,7 +14,8 @@ router.post('/', function (req, res) {
             right: req.body.right || '',
             check: req.body.check || false,
             url: req.body.url,
-            resource: req.body.resource
+            resource: req.body.resource,
+            timestamp: new Date().getTime()
         	};
 		} else {
 			var incorrectError = new Error('incorrect mistake');
@@ -27,6 +28,18 @@ router.post('/', function (req, res) {
         .then(function (result) {
             res.json(result);
         });
+});
+
+router.get('/:id', function (req, res) {
+    rdb.findBy(table, 'resource', req.params.id)
+    .then(function (m) {
+         if(!m) {
+             var notFoundError = new Error('Resource mistake not found');
+             notFoundError.status = 404;
+             return next(notFoundError);
+         }
+         res.json(m);
+    });
 });
 
 router.put('/:id', auth.authorize, function (req, res) {

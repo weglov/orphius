@@ -4,8 +4,7 @@ var connection = rdb.connect(CONFIG)
 .then(function (connection) {
 
     module.exports.changes = function (tableName, id) {
-        return rdb.table(tableName).changes().run(connection)
-        .then(function (cursor) {
+        return rdb.table(tableName).changes().run(connection, (err, cursor) => {
             return cursor;
         });
     };
