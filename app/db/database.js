@@ -22,7 +22,7 @@ var connection = rdb.connect(CONFIG)
         var start = start || 0,
             end = end || 25,
             index = index || 'timestamp';
-        return rdb.table(tableName).filter(rdb.row(fieldName).eq(value)).orderBy({index:  r.desc(index)}).slice(start,end).run(connection)
+        return rdb.table(tableName).filter(rdb.row(fieldName).eq(value)).orderBy({index:  rdb.desc(index)}).slice(start,end).run(connection)
         .then(function (cursor) {
             return cursor.toArray();
         });
