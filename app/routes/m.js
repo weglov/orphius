@@ -15,6 +15,8 @@ router.post('/', function (req, res) {
             check: req.body.check || false,
             url: req.body.url,
             resource: req.body.resource,
+            title: req.body.title || '',
+            options: req.body.option || {},
             timestamp: new Date().getTime()
         	};
 		} else {

@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var CONFIG = require('./config');
+var socketAction = require('./app/socket/io.js');
 // guard 
 var cors = require('cors');
 var helmet = require('helmet');
@@ -11,23 +12,19 @@ var login = require('./app/routes/login');
 var resource = require('./app/routes/resource');
 var router = express.Router();
 var port = process.env.PORT || 888;
-var rdb = require('./app/db/database');
+
+
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 server.listen(888);
-var socketAction = require('./app/socket/io.js');
+
+
+
+
 
 // sockio
-
-
-io.on('connection', function(socket) {
-        // socket event
-        socketAction(io, socket);
-        socket.on('disconnect', function () {
-            
-        })
-});
+socketAction(io)
 
 
 // MIDDLEWHERE

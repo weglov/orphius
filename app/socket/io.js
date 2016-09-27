@@ -1,14 +1,13 @@
-var express = require('express');
-var rdb = require('../db/database');
+var r = require('rethinkdb');
+var CONFIG = require('../../config');
 
-
-var socketAction = function(io, socket) {
-	rdb.changes('m').then(function (item) {
-          item.each((err, m) => {
-          	console.log('Change detected', m);
-        	io.emit('m', m);
-          });
-    });
+module.exports = function(io) {
+	r.connect(CONFIG).then(function(c) {
+	  r.table("m").changes().run(c)
+	    .then(function(cursor) {
+	      cursor.each(function(err, item) {
+	        io.emit("m", item);
+	      });
+	    });
+	});
 }
-
-module.exports = socketAction;
