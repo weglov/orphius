@@ -32,8 +32,8 @@ router.post('/', function (req, res) {
         });
 });
 
-router.get('/:id', function (req, res) {
-    rdb.findBy(table, 'resource', req.params.id)
+router.get('/', function (req, res) {
+    rdb.findByResourse(table, req.query.resource, req.params.offset, req.params.count)
     .then(function (m) {
          if(!m) {
              var notFoundError = new Error('Resource mistake not found');
