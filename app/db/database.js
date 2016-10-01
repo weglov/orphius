@@ -26,6 +26,13 @@ var connection = rdb.connect(CONFIG)
         });
     };
 
+    module.exports.findBy = function (tableName, fieldName, value) {
+        return rdb.table(tableName).filter(rdb.row(fieldName).eq(value)).run(connection)
+        .then(function (cursor) {
+            return cursor.toArray();
+        });
+    };
+
     module.exports.findIndexed = function (tableName, query, index) {
         return rdb.table(tableName).getAll(query, { index: index }).run(connection)
         .then(function (cursor) {
