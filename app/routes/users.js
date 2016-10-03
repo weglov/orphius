@@ -2,17 +2,11 @@ var express = require('express');
 var rdb = require('../db/database');
 var auth = require('../db/auth');
 var router = express.Router();
+var table = 'users';
 
-
-router.get('/', auth.authorize, function (req, res) {
-    rdb.findAll('users')
-    .then(function (users) {
-        res.json(users);
-    });
-});
-
+// Get information about a user. 
 router.get('/:id', auth.authorize, function (req, res, next) {
-    rdb.find('users', req.params.id)
+    rdb.find(table, req.params.id)
     .then(function (user) {
         if(!user) {
             var notFoundError = new Error('User not found');
@@ -24,8 +18,24 @@ router.get('/:id', auth.authorize, function (req, res, next) {
     });
 });
 
+// Get a list of users matching the query.
+router.get('/search/:id', auth.authorize, function (req, res, next) {
+    rdb.find(table, req.params.id)
+    .then(function (user) {
+        if(!user) {
+            var notFoundError = new Error('User not found');
+            notFoundError.status = 404;
+            return next(notFoundError);
+        }
+
+        res.json(user);
+    });
+});
+
+
+// REGISTRATION NEW USER
 router.post('/', function (req, res, next) {
-    rdb.findBy('users', 'email', req.body.email)
+    rdb.findBy(table, 'email', req.body.email)
     .then(function (user) {
         user = user[0];
         // email is busy
@@ -43,7 +53,7 @@ router.post('/', function (req, res, next) {
                         active: req.body.active || true
                     };
 
-                    rdb.save('users', newUser)
+                    rdb.save(table, newUser)
                     .then(function (result) {
                         res.json(result);
                     });
@@ -56,8 +66,9 @@ router.post('/', function (req, res, next) {
     })
 });
 
+// CHANGE USER
 router.put('/:id', auth.authorize, function (req, res) {
-    rdb.find('users', req.params.id)
+    rdb.find(table, req.params.id)
     .then(function (user) {
         var updateUser = {
             name: req.body.user || user.name,
@@ -71,8 +82,9 @@ router.put('/:id', auth.authorize, function (req, res) {
     });
 });
 
+// DELETE USER
 router.delete('/:id', auth.authorize, function (req, res) {
-    rdb.destroy('users', req.params.id)
+    rdb.destroy(table, req.params.id)
     .then(function (results) {
         res.json(results);
     });

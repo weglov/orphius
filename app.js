@@ -7,6 +7,7 @@ var cors = require('cors');
 var helmet = require('helmet');
 // router
 var m = require('./app/routes/m');
+var update = require('./app/routes/update');
 var users = require('./app/routes/users');
 var login = require('./app/routes/login');
 var resource = require('./app/routes/resource');
@@ -40,6 +41,7 @@ app.use(helmet());
 
 
 // Routers
+app.use(CONFIG.api + '/update', update);
 app.use(CONFIG.api + '/m', m);
 app.use(CONFIG.api + '/users', users);
 app.use(CONFIG.api + '/login', login);
