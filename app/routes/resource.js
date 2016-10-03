@@ -51,7 +51,8 @@ router.post('/', auth.authorize, function (req, res) {
 		if (req.body.name && req.body.source) {
 			var newResourse = {
             name: req.body.name,
-            access: req.body.access || {},
+            active: true,
+            access: req.body.access || [],
             source: req.body.source || '',
             settings: req.body.settings || {}
         	};

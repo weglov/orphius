@@ -20,6 +20,7 @@ router.post('/', function (req, res, next) {
         .then(function (authenticated) {
             if(authenticated) {
                 var currentUser = {
+                    id: user.id,
                     name: user.name,
                     email: user.email,
                     token: token.generate(user)
