@@ -33,7 +33,7 @@ router.post('/', function (req, res) {
 });
 
 router.get('/', function (req, res) {
-    rdb.findByResourse(table, req.query.resource, req.params.offset, req.params.count)
+    rdb.findByResourse(table, req.query.resource, parseInt(req.query.offset), parseInt(req.query.count))
     .then(function (m) {
          if(!m) {
              var notFoundError = new Error('Resource mistake not found');
