@@ -19,7 +19,7 @@ router.get('/:id.js',  function (req, res, next) {
         return resource;
     }).then(function(resource) {
         var data = {
-          url: config.url + 'm',
+          url: url + 'm',
           resource: resource.id
         }
         res.setHeader('Content-Type', 'text/javascript; charset=UTF-8');
