@@ -12,6 +12,7 @@ var users = require('./app/routes/users');
 var login = require('./app/routes/login');
 var resource = require('./app/routes/resource');
 var code = require('./app/routes/code');
+var stats = require('./app/routes/stats');
 var router = express.Router();
 var port = process.env.PORT || 888;
 
@@ -48,6 +49,9 @@ app.use(CONFIG.api + '/users', users);
 app.use(CONFIG.api + '/login', login);
 app.use(CONFIG.api + '/resource', resource);
 app.use(CONFIG.api + '/code', code);
+
+app.use(CONFIG.api + '/stats', stats);
+
 
 // Main page version
 app.get('/', function(req, res) {
