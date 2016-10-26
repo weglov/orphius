@@ -31,16 +31,9 @@ var connection = rdb.connect(CONFIG)
     };
     // find by id
     module.exports.stat = function (tableName, id) {
-        var stat = {
-            size: 0,
-            new: 0,
-            check: 0,
-            uncheck: 0
-        }
         return rdb.table(tableName).getAll(id, {index: 'resource'}).count().run(connection)
             .then(function (result) {
-                stat.size = result
-                return stat;
+                return result;
             });
     };
     // all table 
