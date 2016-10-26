@@ -62,7 +62,8 @@ module.exports = function (data) {
       }
     }
     var getInfo = function() {
-      var title = document.getElementsByTagName("h1")[0] || document.title
+      var text = "textContent" in document.body ? "textContent" : "innerText";
+      var title = document.getElementsByTagName("h1")[0][text] || document.title
       return {
         window: JSON.stringify(window.screen),
         title: title,

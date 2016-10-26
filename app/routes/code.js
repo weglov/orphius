@@ -3,6 +3,7 @@ var router = express.Router();
 var rdb = require('../db/database');
 var config = require('../../config.js');
 var code = require('./code/v1.js');
+var url = config.url || 'http://78.155.218.217:888/v1/'
 // Get information about a resource. 
 router.get('/:id.js',  function (req, res, next) {
     // Setting code
