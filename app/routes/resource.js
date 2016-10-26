@@ -19,7 +19,6 @@ router.get('/self/:userid', function (req, res, next) {
     .then(function(resource) {
         var array = resource.map(function(index, i) {
             return rdb.stat('m', index.id).then(function(id) {
-                console.log(id);
                 resource[i].size = id
                 return resource[i]
             })
