@@ -67,8 +67,7 @@ module.exports = function (data) {
       return {
         window: JSON.stringify(window.screen),
         title: title,
-        url: location.href,
-        timestamp: new Date().getTime()
+        url: location.href
         }
     }
     var onKeyPress = function() {
@@ -90,7 +89,6 @@ module.exports = function (data) {
           m: m.m,
           left: m.left,
           right: m.right,
-          timestamp: info.timestamp,
           options: info.window
         });
       }

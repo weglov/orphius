@@ -12,20 +12,12 @@ router.get('/:id.js',  function (req, res, next) {
       url: config.url + 'm'
     }
     
-    // Полученние настроек ресурса
-    rdb.find("resource", req.params.id)
-      .then(function (resource) {
-        init.resource = resource.id
-        return resource;
-    }).then(function(resource) {
         var data = {
           url: url + 'm',
-          resource: resource.id
+          resource: req.params.id
         }
         res.setHeader('Content-Type', 'text/javascript; charset=UTF-8');
         res.status(200).send(code(JSON.stringify(data)));
-    })
-
    
 
 });
